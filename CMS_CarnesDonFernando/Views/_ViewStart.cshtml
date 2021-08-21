@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    Layout = "_Layout";
+    HttpContext httpContext = new HttpContextAccessor().HttpContext;
+    var session = Context.Session.GetString("JWToken");
+    string path = Context.Request.Path;
+    if (string.IsNullOrEmpty(session) && path != "/Home/Login")
+    {
+        Context.Response.Redirect("/Home/Login");
+    }
+}

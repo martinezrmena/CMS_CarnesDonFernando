@@ -1,0 +1,269 @@
+﻿@using CMS_CarnesDonFernando.Models;
+@model List<ProductoMesModel>
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<!DOCTYPE html>
+<html lang="es-CR">
+
+<head>
+    <title>Carnes Don Fernando</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Fernanda Gutierrez G">
+    <!-- Mobile Specific Metas -->
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta content='IE=edge' http-equiv='X-UA-Compatible' />
+
+    <link rel="icon" href="~/assets/img/flaticon/cropped-logo-Don-Fernando-512px-32x32.png" sizes="32x32">
+    <link rel="icon" href="~/assets/img/flaticon/cropped-logo-Don-Fernando-512px-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon-precomposed" href="~/assets/img/flaticon/cropped-logo-Don-Fernando-512px-180x180.png">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="~/assets/plugins/datatable/css/datatables.min.css">
+    <link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/index.css">
+
+</head>
+
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg">
+            <div class="row nav-bar">
+                <a class="navbar-brand" href="#">
+                    <img src="~/assets/img/logo simple.png" alt="Consulting Group Corporación" class="logo img-responsive" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">☰</button>
+                <div class="collapse navbar-collapse nav-mobile " id="navbar-collapse">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Sucursales_tab" data-url="@Url.Action("Index", "Sucursales")">Sucursales</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Promociones_tab" data-url="@Url.Action("Index", "Promociones")">Promociones</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="PlanLealtad_tab" data-url="@Url.Action("Index", "PlanLealtad")">Plan de Lealtad</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Productos_tab" data-url="@Url.Action("Index", "ProductosMes")">Productos del Mes</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="AcercaDe_tab" data-url="@Url.Action("Index", "AcercaDe")">Acerca De</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Configuracion_tab" data-url="@Url.Action("Index", "Parametrizacion")">Configuraci&oacute;n</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="CerrarSession_tab" data-url="@Url.Action("CerrarSession", "Home")"><i class="fas fa-power-off fa-lg i-center"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-xl" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="frmModal" method="post" enctype="multipart/form-data" asp-controller="ProductosMes" asp-action="EjecutarAcciones" autocomplete="off">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input type="text" class="form-control" id="txtNombre" maxlength="90" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label id="msgNombre" style="color:red;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Imagen</label>
+                                        <div id="divImagen">
+                                            <img class="imagen-Modal" id="imgSalida" />
+                                        </div>
+                                        <div id="divImg">
+                                            <input type="file" class="form-control" id="Urlimage" value="" accept="image/*" required>
+                                        </div>
+                                        <div id="divFilter" hidden>
+                                            <input type="button" value="Editar Imagen" id="filter">
+                                        </div>
+                                        <div class="form-row">
+                                            <label id="msgUrlimage" style="color:red;"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Descripci&oacute;n resumen</label>
+                                        <input type="text" class="form-control" id="txtDesResumen" maxlength="300" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label id="msgDesResumen" style="color:red;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Descripci&oacute;n detalle</label>
+                                        <input type="text" class="form-control" id="txtDesDetalle" maxlength="500" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label id="msgDesDetalle" style="color:red;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Preparaci&oacute;n</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Coccion" id="chkCoccion" name="Preparacion">
+                                        <img class="img-table" src="@ViewBag.Coccion" />
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Frio" id="chkFrio" name="Preparacion">
+                                        <img class="img-table" src="@ViewBag.Frio" />
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Horno" id="chkHorno" name="Preparacion">
+                                        <img class="img-table" src="@ViewBag.Horno" />
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Parrilla" id="chkParrilla" name="Preparacion">
+                                        <img class="img-table" src="@ViewBag.Parrilla" />
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="Sarten" id="chkSarten" name="Preparacion">
+                                        <img class="img-table" src="@ViewBag.Sarten" />
+                                    </div>
+
+                                    <div class="form-row">
+                                        <label id="msgPreparacion" style="color:red;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Fecha de inicio</label>
+                                        <input type="text" class="form-control" id="txtFechaInicio" value="" data-toggle="datepicker" maxlength="10" onkeypress="return justNumbers(event);" placeholder="dd/mm/aaaa" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label id="msgFechaInicio" style="color:red;"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Fecha de finalizaci&oacute;n</label>
+                                        <input type="text" class="form-control" id="txtFechaFin" value="" data-toggle="datepicker" maxlength="10" onkeypress="return justNumbers(event);" placeholder="dd/mm/aaaa" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label id="msgFechaFin" style="color:red;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="pAccion" value="" id="pAccion" />
+                            <input type="hidden" class="form-control" id="RowKey" value="">
+                            <input type="hidden" class="form-control" id="PartitionKey" value="">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-gray" data-dismiss="modal">Cerrar</button>
+                        <button type="button" id="btn_Registrar" class="btn btn-primary btn-red">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="banner">
+            <h1>Productos del Mes</h1>
+            <div class="container-floating">
+                <div class="row row-floating">
+                    <div class="col-12 no-padding-cascade">
+                        <table class="table table-hover table-white dt-responsive datatable">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Imagen</th>
+                                    <th>Descripci&oacute;n resumen</th>
+                                    <th>Descripci&oacute;n detalle</th>
+                                    <th>Fecha de inicio</th>
+                                    <th>Fecha de finalizaci&oacute;n</th>
+                                    <th>Editar</th>
+                                    <th>Borrar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                <tr>
+                                    <td>@item.Titulo</td>
+                                    <td class="td-img">
+                                        <img class="img-table" src="@item.ImagenUrl" alt="">
+                                    </td>
+                                    <td>@item.Descripcion_Resumen</td>
+                                    <td>@item.Descripcion_Detalle</td>
+                                    <td>@item.Fecha_Publicacion</td>
+                                    <td>@item.Fecha_Finalizacion</td>
+                                    <td>
+                                        <a class="td-edit" href="#" data-toggle="modal" data-target="#modal-register" onclick="CargarFormulario('@item.PartitionKey', '@item.RowKey')">
+                                            <i class="fas fa-edit fa-lg"></i>
+                                        </a>
+                                    </td>
+                                    <td><a class="td-delete" href="#" onclick="EliminarProductoMes('@item.PartitionKey', '@item.RowKey')"><i class="fas fa-trash-alt fa-lg"></i></a></td>
+                                </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="banner-footer"></section>
+    </main>
+
+    <footer>
+        <h5>
+            &copy;
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            Carnes Don Fernando
+        </h5>
+    </footer>
+
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Plugins-->
+    <script src="~/assets/plugins/datatable/js/datatables.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/datatable/js/dataTables.responsive.min.js" type="text/javascript"></script>
+    <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js" type="text/javascript"></script>
+    <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.es-ES.js " type="text/javascript "></script>
+
+    <script src="~/assets/js/client.js "></script>
+    <script src="~/js/FuncionesMenu.js"></script>
+    <script src="~/js/ProductosMes/Principal_Index.js"></script>
+    <script src="~/js/sweetalert/sweetalert.min.js"></script>
+
+</body>
+
+</html>
+

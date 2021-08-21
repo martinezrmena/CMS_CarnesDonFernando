@@ -1,0 +1,19 @@
+﻿{
+  "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
+  "Version": "15.0.40203.910",
+  "ExtendedData": {
+    "inputs": [
+      "http://bo.carnesdonfernando.com:8089/TM-PROD-01/Actualizacion.asmx"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "internalTypeAccess": true,
+    "namespaceMappings": [
+      "*, ActualizacionApp"
+    ],
+    "targetFramework": "netcoreapp2.1",
+    "typeReuseMode": "Specified"
+  }
+}

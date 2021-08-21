@@ -1,0 +1,198 @@
+﻿@using CMS_CarnesDonFernando.Models;
+@model ParametrizacionesModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<!DOCTYPE html>
+<html lang="es-CR">
+
+<head>
+    <title>Carnes Don Fernando</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Fernanda Gutierrez G">
+    <!-- Mobile Specific Metas -->
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta content='IE=edge' http-equiv='X-UA-Compatible' />
+
+    <link rel="icon" href="~/assets/img/flaticon/cropped-logo-Don-Fernando-512px-32x32.png" sizes="32x32">
+    <link rel="icon" href="~/assets/img/flaticon/cropped-logo-Don-Fernando-512px-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon-precomposed" href="~/assets/img/flaticon/cropped-logo-Don-Fernando-512px-180x180.png">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="~/assets/plugins/datatable/css/datatables.min.css">
+    <link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/index.css">
+
+
+
+
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg">
+            <div class="row nav-bar">
+                <a class="navbar-brand" href="#">
+                    <img src="~/assets/img/logo simple.png" alt="Consulting Group Corporación" class="logo img-responsive" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">☰</button>
+                <div class="collapse navbar-collapse nav-mobile " id="navbar-collapse">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Sucursales_tab" data-url="@Url.Action("Index", "Sucursales")">Sucursales</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Promociones_tab" data-url="@Url.Action("Index", "Promociones")">Promociones</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="PlanLealtad_tab" data-url="@Url.Action("Index", "PlanLealtad")">Plan de Lealtad</a> </li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Productos_tab" data-url="@Url.Action("Index", "ProductosMes")">Productos del Mes</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="Configuracion_tab" data-url="@Url.Action("Index", "Parametrizacion")">Configuraci&oacute;n</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="#" id="CerrarSession_tab" data-url="@Url.Action("CerrarSession", "Home")"><i class="fas fa-power-off fa-lg i-center"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="banner">
+            <h1>Configuraciones</h1>
+            <div class="container-floating">
+                <div class="row row-floating">
+                    <div class="col-12 no-padding-cascade">
+
+                        <div class="form-row">
+                            <div>
+                                <div class="form-group">
+                                    <label>Usuario de Correo</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.User, new { @class = "form-control", id = "txtUserMail", @maxlength = "320" })
+                                </div>
+                                <div class="form-row">
+                                    <label id="msgUserMail" style="color:red;"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <div class="form-group">
+                                    <label>Contrase&ntilde;a de Correo</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Pass, new { @class = "form-control", id = "txtUserPass", @maxlength = "25" })
+                                </div>
+                                <div class="form-row">
+                                    <label id="msgUserPass" style="color:red;"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <div class="form-group">
+                                    <label>Cliente Proveedor SMTP</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Client, new { @class = "form-control", id = "txtHost", @maxlength = "30" })
+                                </div>
+                                <div class="form-row">
+                                    <label id="msgHost" style="color:red;"></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div>
+                                <div class="form-group">
+                                    <label>Puerto de Correo SMTP</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Port, new { @class = "form-control", id = "txtPort", @maxlength = "5" })
+                                </div>
+                                <div class="form-row">
+                                    <label id="msgPort" style="color:red;"></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<div class="form-row">
+                            <div>
+                                <div class="form-group">
+                                    <label>Tiempo de sincronizaci&oacute;n de datos</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Client, new { @class = "form-control", id = "txtHost", @maxlength = "20" })
+                                </div>
+                                <div class="form-row">
+                                    <label id="msgHost" style="color:red;"></label>
+                                </div>
+                            </div>
+                        </div>*@
+
+
+                        <input type="hidden" name="pAccion" value="@ViewBag.Accion" id="pAccion" />
+                        <input type="hidden" class="form-control" id="RowKey" value="@Model.RowKey">
+                        <input type="hidden" class="form-control" id="PartitionKey" value="@Model.PartitionKey">
+
+                        <div>
+                            <button type="button" id="btn_Registrar" class="btn btn-primary btn-red" style="position: absolute; right: 0;">Registrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="banner-footer"></section>
+    </main>
+
+    <footer>
+        <h5>
+            &copy;
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            Carnes Don Fernando
+        </h5>
+    </footer>
+
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Plugins-->
+    <script src="~/assets/plugins/datatable/js/datatables.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/datatable/js/dataTables.responsive.min.js" type="text/javascript"></script>
+    <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js" type="text/javascript"></script>
+    <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.es-ES.js " type="text/javascript "></script>
+
+    <script src="~/assets/js/client.js "></script>
+    <script src="~/js/FuncionesMenu.js"></script>
+    <script src="~/js/Parametrizacion/Principal_Index.js"></script>
+    <script src="~/js/sweetalert/sweetalert.min.js"></script>
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,173 @@
+@charset "utf-8";
+
+/*------------------------------------------------------------------
+[Dashboard Stylesheet]
+
+Project: Carnes Don Fernando
+Version: 1.0
+Update:  12/08/2019
+------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------
+[Imports]
+------------------------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');
+
+/*------------------------------------------------------------------
+[Colors]
+------------------------------------------------------------------*/
+
+:root {
+    --cdf-darkgrey: #272727;
+    --cdf-lightgrey: #878787;
+    --cdf-red-primary: #73211B;
+    --cdf-red-secondary-1: #7E0010;
+    --cdf-red-secondary-2: #640000;
+    --cdf-white: #ffffff;
+}
+
+
+/*------------------------------------------------------------------
+[Basic]
+------------------------------------------------------------------*/
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    color: #5b5b5b;
+    font-size: 14px;
+    font-family: 'Cookie', cursive;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/*------------------------------------------------------------------
+[Typography]
+------------------------------------------------------------------*/
+
+h2,
+h3 {
+    font-family: 'Cookie', cursive;
+    color: #fff;
+    width: 100%;
+    margin: 0;
+}
+
+h2 {
+    font-size: 3.5em;
+    letter-spacing: 0.2pt;
+    text-align: center;
+}
+
+h3 {
+    font-size: 2.5em;
+    letter-spacing: 0.2pt;
+    text-align: center;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+
+/*------------------------------------------------------------------
+[Containers]
+------------------------------------------------------------------*/
+
+.row {
+    margin: 0 !important;
+}
+
+.box {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.grid-div-main {
+    display: inline-block;
+    margin: 0;
+    width: 20%;
+}
+
+.grid-div-main:nth-child(1):hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../img/dashboard/cordero.png') !important;
+}
+
+.grid-div-main:nth-child(2):hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../img/dashboard/cerdo-1.png') !important;
+}
+
+.grid-div-main:nth-child(3):hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../img/dashboard/res.png') !important;
+}
+
+.grid-div-main:nth-child(4):hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../img/dashboard/cerdo.png') !important;
+}
+
+.grid-div-main:nth-child(5):hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../img/dashboard/pollo.png') !important;
+}
+
+
+/*------------------------------------------------------------------
+[SVG and Img]
+------------------------------------------------------------------*/
+
+.opt-svg {
+    padding-bottom: 30px;
+    width: 40%;
+    fill: #fff;
+}
+
+.img-dashboard {
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/*------------------------------------------------------------------
+[Medias]
+------------------------------------------------------------------*/
+
+@media (max-width: 1200px) {
+    .grid-div-main {
+        width: 100%;
+    }
+    h2 {
+        font-size: 4.5em;
+    }
+    h3 {
+        font-size: 3.5em;
+    }
+}
+
+@media (max-width: 576px) {
+    h2 {
+        font-size: 4em;
+    }
+    h3 {
+        font-size: 3em;
+    }
+}
